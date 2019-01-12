@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="bum">the stuff: <br /></div>
+
+        <script type="text/javascript">
+                      
+            let myRequest = 'todo.json'
+            let thing="";
+            fetch(myRequest)
+            .then(function(response) {              
+                  return response.json()               
+            })
+            .then(function(json) { 
+                console.log(json)
+                for(let i=0;i<json.length;i++){
+                    thing+="<br />UserID: "+json[i].userId+"<br />ID: "+json[i].id+"<br />Title: "+json[i].title+"<br />Completed:"+json[i].completed+"<br />";
+                }
+               document.querySelector("#bum").innerHTML+=thing;
+
+            })
+           
+
+
+        </script>
+        
+    </body>
+</html>
