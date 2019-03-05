@@ -40,10 +40,12 @@ let stringy="<table><tbody>";
     console.log(doc);
     for(let i =0; i < doc.length; i++){
         stringy+="<tr>"
-        stringy+="<td>"+doc[i].buttCount+"<td>";
-        stringy+="<td>"+doc[i].isItLarry+"<td>";
-        stringy+="<td>"+doc[i].toeCount+"<td>";
-        stringy+="<td>"+doc[i].name+"<td>";
+        stringy+="<td>"+doc[i].fname+"<td>";
+        stringy+="<td>"+doc[i].lname+"<td>";
+        stringy+="<td>"+doc[i].dept+"<td>";
+        stringy+="<td>"+doc[i].date+"<td>";
+        stringy+="<td>"+doc[i].title+"<td>";
+        stringy+="<td>"+doc[i].salary+"<td>";
         stringy+='<td><a href="update?id='+doc[i].id+'">Update</a><td>';
         stringy+='<td><a href="delete?id='+doc[i].id+'">Delete</a><td>';
         stringy+="</tr>"
@@ -63,20 +65,6 @@ app.get("/", function(req,res){
 });
 
 app.get("/view", (req,res)=>{
-    res.render('view.hbs');
-})
-
-app.get("/add", (req,res)=>{
-    res.render('add.hbs');
-})
-
-
-app.post("/results", (req,res)=>{
-    var shammy = new butter({ buttCount:req.body.buttCount,isItLarry:req.body.isItLarry, toeCount:req.body.toeCount, name:req.body.name });
-    var lammy = shammy.save(function (err, butter){
-        if (err) return console.error(err);
-        console.log(butter);
-    });
     var jimmy = butter.find();
     jimmy.then(function (doc){
         let stringydingy = parsethedata(doc);
@@ -84,10 +72,30 @@ app.post("/results", (req,res)=>{
             thedata:stringydingy
         })
     })
+})
+
+
+
+app.post("/results", (req,res)=>{
+    var shammy = new butter({ fname:req.body.fname,lname:req.body.lname, dept:req.body.dept, date:req.body.date,title:req.body.title,salary:req.body.salary });
+    var lammy = shammy.save(function (err, butter){
+        if (err) return console.error(err);
+        console.log(butter);
+    })
+
+    var jimmy = butter.find();
+    setInterval(function (){
+    jimmy.then(function (doc){
+        let stringydingy = parsethedata(doc);
+        res.render('view.hbs', {            
+            thedata:stringydingy
+        })
+    });
+    },1000);
 });
 
 app.post("/updateButter", (req,res)=>{
-    var shammy = butter.findByIdAndUpdate(req.body.id,{ $set: { buttCount:req.body.buttCount, isItLarry:req.body.isItLarry, toeCount:req.body.toeCount, name:req.body.name }});
+    var shammy = butter.findByIdAndUpdate(req.body.id,{ $set: { fname:req.body.fname, lname:req.body.lname, dept:req.body.dept, date:req.body.date,title:req.body.title,salary:req.body.salary  }});
     shammy.then(function (doc){
         var jimmy = butter.find();
     jimmy.then(function (doc){
@@ -100,6 +108,8 @@ app.post("/updateButter", (req,res)=>{
 });
 
 
+
+
 app.get("/update",(req,res)=>{
     var _id=req.query.id;
     console.log(_id);
@@ -107,10 +117,12 @@ app.get("/update",(req,res)=>{
         console.log(butter);
         res.render('update.hbs', {          
             id:butter.id,
-            buttCount:butter.buttCount,
-            isItLarry:butter.isItLarry,
-            toeCount:butter.toeCount,
-            name:butter.name
+            fname:butter.fname,
+            lname:butter.lname,
+            dept:butter.dept,
+            date:butter.date,
+            title:butter.title,
+            salary:butter.salary
         })
     });
 
@@ -118,9 +130,8 @@ app.get("/update",(req,res)=>{
 
 app.get("/delete",(req,res)=>{
 
-    var id=req.query.id;
-    console.log(id);//not deleting the right id number -- 
-    let boobies = butter.findOneAndDelete(id);
+    var _id=req.query.id;
+    let boobies = butter.findByIdAndDelete(_id);
     boobies.then(function (doc){
         var jimmy = butter.find();
         jimmy.then(function (doc){

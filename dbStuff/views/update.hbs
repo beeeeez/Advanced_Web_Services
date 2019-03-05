@@ -5,14 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        body{
+            background-color:black;
+            color:white;
+
+        }
+        #mah {
+            margin:auto;
+            width:600px;
+            text-align:center;
+        }
+
+         input {
+            margin-bottom:5px;
+        }
+
+
+    </style>
 </head>
-<body>
+<body><div id="mah">
     <form action="updateButter" method="POST">
+       
         <input type="hidden" name="id" value="{{id}}" >
-        <input type="text" name="buttCount" value="{{buttCount}}"><br />
-        <input type="text" name="isItLarry" value="{{isItLarry}}"><br />
-        <input type="text" name="toeCount" value="{{toeCount}}"><br />
-        <input type="text" name="name" value="{{name}}"><br />
-        <input type="submit" value="submit"></form>
+        <input type="hidden" class="isuck" value="{{dept}}" >
+        <input type="hidden" class="realbad" value="{{date}}" >
+          <h4>First Name:</h4>
+        <input type="text" name="fname" value="{{fname}}"><br />
+       <h4>Last Name:</h4>
+        <input type="text" name="lname" value="{{lname}}"><br />
+           <h4>Department:</h4>
+        
+      <select name="dept" class="dept">
+    <option value="Jimmy">Jimmy</option>
+                <option value="Plumbing">Plumbing</option>
+                    <option value="Bleck">Bleck</option>
+                        <option value="Teaching">Teaching</option>
+                        </select>
+                         <h4>Start Date: </h4>
+        <input type="date" name="date" class="date"><br />
+        <h4>Title:</h4>
+           <input type="text" name="title" value="{{title}}"><br />
+           <h4>Salary:</h4>
+              <input type="number" name="salary" value="{{salary}}"><br />
+        <input type="submit" value="Update Record"></form>
+</div>
+
+<script>
+    let x = document.querySelector(".isuck").value;
+    document.querySelector(".dept").value=x;    
+    var y = new Date(document.querySelector(".realbad").value);
+    let string = y.getFullYear() + "-" + y.getMonth() + 1 + "-" + y.getDate();
+    console.log(string)
+    document.querySelector(".date").value = string;
+</script>
+        
 </body>
 </html>

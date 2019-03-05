@@ -5,8 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+        <style>
+        body{
+            background-color:black;
+            color:white;
+
+        }
+        #mah {
+            margin:auto;
+            width:600px;
+            text-align:center;
+        }
+        table tr td{
+            border-width:2px;
+            border-style:solid;
+            border-color:gray;
+            padding:3px;
+        }
+        input {
+            margin-bottom:5px;
+        }
+
+    </style>
 </head>
 <body>
+    <div id="mah">
     {{{thedata}}}
+
+
+    <form action="results" method="POST">
+        <h4>First Name:</h4>
+        <input type="text" name="fname"><br />
+            <h4>Last Name:</h4>
+        <input type="text" name="lname"><br />
+            <h4>Department:</h4>
+        <select name="dept">
+            <option value="Jimmy">Jimmy</option>
+                <option value="Plumbing">Plumbing</option>
+                    <option value="Bleck">Bleck</option>
+                        <option value="Teaching">Teaching</option>
+                        </select>
+            <h4>Start Date:</h4>
+        <input type="date" name="date"><br />
+            <h4>Title:</h4>
+        <input type="text" name="title"><br />
+            <h4>Salary:</h4>
+        <input type="number" name="salary"><br /><br />
+        <input type="submit" value="Add New Record">
+    </form>
+
+</div>
+
 </body>
 </html>
